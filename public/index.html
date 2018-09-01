@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Flask" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/14/Flask/" class="article-date">
+  <time datetime="2018-07-14T06:48:30.196Z" itemprop="datePublished">2018-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="cookies"><a href="#cookies" class="headerlink" title="cookies"></a>cookies</h3><p>客户端端的会话技术<br>cookie本身由浏览器保存，通过Response将cookie写到浏览器上，下一次访问，浏览器会根据不同的规则携带cookie过来</p>
+<p>特点:</p>
+<pre><code>- 客户端会话技术，浏览器的会话技术
+- 数据全都是存储在客户端中
+- 存储使用的键值对结构进行的存储
+- 特性
+- 支持过期时间
+    - 默认会自动携带本网站的所有cookie
+       - 根据域名进行cookie存储
+         - 不能跨域名
+         - 不能跨浏览器
+    - Cookie是通过服务器创建的Response来创建的
+</code></pre><p> 设置cookie:<br>      response.set_cookie(key,value[,max_age=None,exprise=None)]<br>        max_age: 整数，指定cookie过期时间<br>        expries: 整数，指定过期时间，可以指定一个具体日期时间<br>        max_age和expries两个选一个指定</p>
+<p> 获取cookie:<br>      request.cookie.get(key)</p>
+<p> 删除cookie<br>    response.delete_cookie(key)</p>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">服务器端会话技术,依赖于cookie</span><br><span class="line">特点:</span><br><span class="line">    - 服务端的会话技术</span><br><span class="line">    - 所有数据存储在服务器中</span><br><span class="line">    - 默认存储在内存中</span><br><span class="line">        - django是默认做了数据持久化（存在了数据库中）</span><br><span class="line">    - 存储结构也是key-value形势，键值对</span><br><span class="line">    - session 是离不开cookie的</span><br><span class="line"></span><br><span class="line">常用操作:</span><br><span class="line">	设置session</span><br><span class="line">  		session[‘key’] = ‘value’ </span><br><span class="line">        </span><br><span class="line">  	获取session</span><br><span class="line">  		session.get(key,default=None) 根据键获取会话的值</span><br><span class="line">        </span><br><span class="line">  	删除session</span><br><span class="line">  		pop(key) 删除某一值  </span><br><span class="line">  		clear()   清除所有</span><br></pre></td></tr></table></figure>
+<h3 id="Flask环境搭建"><a href="#Flask环境搭建" class="headerlink" title="Flask环境搭建"></a>Flask环境搭建</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">1、在项目中创建一个python package，如App会自动生成一个init文件</span><br><span class="line">2、将项目中的static和templates文件放到App中</span><br><span class="line">3、在init文件中创建app</span><br><span class="line">   如： def create_app():</span><br><span class="line">        app =Flask(__name__)</span><br><span class="line">        return app</span><br><span class="line">4、将项目中的py文件改名为manage.py，并导入app，Manager，将app.run()改为manager</span><br><span class="line">   如： app = create_app()</span><br><span class="line">        manager = Manager(app)</span><br><span class="line">        if __name__ == '__main__':</span><br><span class="line">            manager.run()</span><br><span class="line">5、在App中创建views.py,models.py,settings.py,exts.py文件</span><br><span class="line">6、在views.py中创建蓝图</span><br><span class="line">  如：  from flask import Blueprint</span><br><span class="line">    	blue = Blueprint('blue',__name__)</span><br><span class="line">（**如果蓝图不想再init中注册则可以直接再创建的蓝图下面自定义一个函数并注册蓝图，</span><br><span class="line">	如：def init_blue(app):</span><br><span class="line">    app.register_blueprint(blue)</span><br><span class="line">）</span><br><span class="line">*7、在init.py中注册蓝图</span><br><span class="line">	如：app.register_blueprint(blue)</span><br><span class="line">（**如果蓝图没有再init中注册则直接在这里导入6中注册蓝图的函数。如：init_exts(app)</span><br><span class="line">8、在settings中进行配置</span><br><span class="line">如mysql数据库配置：</span><br><span class="line">def get_db_uri(dbinfo):</span><br><span class="line">    db = dbinfo.get('DB')</span><br><span class="line">    driver = dbinfo.get('DRIVER')</span><br><span class="line">    user = dbinfo.get('USER')</span><br><span class="line">    password = dbinfo.get('PASSWORD')</span><br><span class="line">    host = dbinfo.get('HOST')</span><br><span class="line">    port = dbinfo.get('PORT')</span><br><span class="line">    name = dbinfo.get('NAME')</span><br><span class="line">    return "&#123;&#125;+&#123;&#125;://&#123;&#125;:&#123;&#125;@&#123;&#125;:&#123;&#125;/&#123;&#125;".format(db, driver, user, password, host, port, name)</span><br><span class="line">class Config:</span><br><span class="line">    DEBUG = False</span><br><span class="line">    TESTING = False</span><br><span class="line">    SQLALCHEMY_TRACK_MODIFICATIONS = False</span><br><span class="line">    SECRET_KEY = '110'</span><br><span class="line"></span><br><span class="line">class DevelopConfig(Config):</span><br><span class="line">    DEBUG = True</span><br><span class="line">    DATABASE = &#123;</span><br><span class="line">        'DB': 'mysql',</span><br><span class="line">        'DRIVER': 'pymysql',</span><br><span class="line">        'USER': 'root',</span><br><span class="line">        'PASSWORD': 'rock1204',</span><br><span class="line">        'HOST': 'localhost',</span><br><span class="line">        'PORT': '3306',</span><br><span class="line">        'NAME': 'testflask3',</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">env = &#123;</span><br><span class="line">    'develop': DevelopConfig,</span><br><span class="line">    'test': TestingConfig,</span><br><span class="line">    'product': ProductConfig,</span><br><span class="line">&#125;</span><br><span class="line">9、在init文件中加载setting配置信息</span><br><span class="line">如：app.config.from_object(env.get('develop'))</span><br><span class="line">10、在exts导入第三方插件（exts文件用于导入和初始化第三方插件）</span><br><span class="line">如：在init中的Migrate，models中的Migrate</span><br><span class="line">    from flask_migrate import Migrate</span><br><span class="line">    from flask_sqlalchemy import SQLAlchemy</span><br><span class="line">    #自定义第三方插件</span><br><span class="line">    db = SQLAlchemy()</span><br><span class="line">    migrate = Migrate()</span><br><span class="line">    #初始化第三方插件</span><br><span class="line">    def init_exts(app):</span><br><span class="line">        db.init_app(app)</span><br><span class="line">        migrate.init_app(app=app,db=db)</span><br><span class="line">11、在init删除已经导入exts中的第三发插件，同时初始化第三方插件</span><br><span class="line">在init删除已经导入exts中的第三发插件，同时初始化第三方插件</span><br><span class="line">如：    init_exts(app)</span><br><span class="line">12、RESTful</span><br><span class="line">将views改为apis,导入Resource</span><br><span class="line">from flask_restful import Resource</span><br><span class="line">如:class Hello(Resource):</span><br><span class="line">    def get(self):</span><br><span class="line">        return &#123;'msg':'GET请求'&#125;</span><br><span class="line">    def post(self):</span><br><span class="line">        return &#123;'msg':'Post请求'&#125; #返回值是json格式的数据</span><br><span class="line">13、App内新建一个urls用来设置访问路径,需要导入apis内的函数</span><br><span class="line">如: from App.apis import *</span><br><span class="line">    from App.exts import api</span><br><span class="line">    api.add_resource(Hello,'/hello/')(其中Hello为apis函数,/hello/为路径)</span><br></pre></td></tr></table></figure>
+<h3 id="Flask创建数据库"><a href="#Flask创建数据库" class="headerlink" title="Flask创建数据库"></a>Flask创建数据库</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">一、创建sql数据库</span><br><span class="line">1、在models.py中设置db</span><br><span class="line">from flask_sqlalchemy import SQLAlchemy</span><br><span class="line">db = SQLAlchemy()</span><br><span class="line">2、在init.py中配置数据库和初始化orm</span><br><span class="line">app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite3.db'</span><br><span class="line">app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False</span><br><span class="line">db.init_app(app=app)</span><br><span class="line">3、在models中设置table（表格名：__tablename__ = 'People'）</span><br><span class="line">4、在views.py中设置函数</span><br><span class="line">如：@blue.route（‘/createdb/’）</span><br><span class="line">def create_db():</span><br><span class="line">	db.create_all()  #创建table（db.drop_all(),删除table）</span><br><span class="line">	return 'success'</span><br><span class="line">5、在浏览器中运行，可以App文件夹中看见又sqlite3.db文件生产</span><br><span class="line">6、添加数据</span><br><span class="line">如：p= Person()</span><br><span class="line">p.name = 'xxx' + str(random.randeange(10.100))</span><br><span class="line">p.age = random.randrange(10,100)</span><br><span class="line">db.session.add(p)</span><br><span class="line">db.session.commit()</span><br><span class="line">return 'success'</span><br><span class="line">7、获取数据</span><br><span class="line">persons = Person.query.all()</span><br><span class="line">8、删除数据</span><br><span class="line">	p = Person.query.first()  # 获取第一条数据</span><br><span class="line">    db.session.delete(p)</span><br><span class="line">    db.session.commit()</span><br><span class="line">    </span><br><span class="line">9、修改数据</span><br><span class="line">    p = Person.query.first()</span><br><span class="line">    p.age = 100</span><br><span class="line">    db.session.commit()</span><br><span class="line">二、创建mysql数据库</span><br><span class="line">app.config['SQLALCHEMY_DATABASE_URI'] = dialect+driver://username:password@host:port/database</span><br><span class="line">DB_URI=‘mysql+pymsql://&#123;&#125;:&#123;&#125;@&#123;&#125;:&#123;&#125;/&#123;&#125;’.format(</span><br><span class="line">  USERNAME,用户名</span><br><span class="line">  PASSWORD,密码</span><br><span class="line">  HOSTNAME,主机</span><br><span class="line">  PORT,端口</span><br><span class="line">  DATABASE)数据库名</span><br><span class="line">三、数据迁移</span><br><span class="line">安装</span><br><span class="line">	pip install flask-migrate</span><br><span class="line">    </span><br><span class="line">初始化</span><br><span class="line">	使用app和db进行migrate对象初始化</span><br><span class="line">    	from flask_migrate import Migrate</span><br><span class="line">		migrate = Migrate()</span><br><span class="line">    	migrate.init_app(app=app, db=db)</span><br><span class="line">    </span><br><span class="line">    安装了flask-script后，可以在manager上添加迁移指令</span><br><span class="line">    	from flask_migrate import MigrateCommand</span><br><span class="line">		manager.add_command('db', MigrateCommand)</span><br><span class="line"></span><br><span class="line">python manager.py db init  只调用一次, 这里的db是添加命令时给定的名称</span><br><span class="line">python manager.py db migrate  生成迁移文件</span><br><span class="line">python manager.py db upgrade  执行迁移中的升级</span><br><span class="line">python manager.py db downgrade  执行迁移中的降级</span><br></pre></td></tr></table></figure>
+<h3 id="字段格式化"><a href="#字段格式化" class="headerlink" title="字段格式化"></a>字段格式化</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">fields进行定义</span><br><span class="line">marshal_with进行使用</span><br><span class="line">	特性</span><br><span class="line">        显示我们设计的数据结构</span><br><span class="line">        默认返回的数据如果在预定义结构中不存在，数据会被自动过滤</span><br><span class="line">        如果返回的数据在预定义的结构中存在，数据会正常返回</span><br><span class="line">        如果返回的数据比预定义结构中的字段少，预定义的字段会呈现一个默认值</span><br><span class="line">        </span><br><span class="line">	定义字段输出</span><br><span class="line">        使用字典进行定义</span><br><span class="line">        常用都是基本类型: String, Integer</span><br><span class="line">        </span><br><span class="line">            # 格式化字段</span><br><span class="line">            user_fields = &#123;</span><br><span class="line">                'msg': fields.String,</span><br><span class="line">                'status': fields.Integer,</span><br><span class="line">                'data': fields.String(attribute='private_data'),</span><br><span class="line">                'default_data': fields.String(default='1')</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    	定义好的格式通过装饰器进行使用</span><br><span class="line">            @marshal_with(需要返回的数据格式),  return返回字典就ok了</span><br><span class="line"></span><br><span class="line">                class Users(Resource):</span><br><span class="line">                    @marshal_with(user_fields)</span><br><span class="line">                    def get(self):</span><br><span class="line">                        return &#123;'msg':'呵呵', 'data':'没有数据', 'age':'22', 'private_data':'表中数据'&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	级联数据: 嵌套字典</span><br><span class="line">		Nested</span><br><span class="line">        </span><br><span class="line">            # 格式化字段</span><br><span class="line">            usermodel_fileds = &#123;</span><br><span class="line">                'id': fields.Integer,</span><br><span class="line">                'name': fields.String,</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            user2_fields = &#123;</span><br><span class="line">                'msg': fields.String(default='ok'),</span><br><span class="line">                'status': fields.Integer(default=1),</span><br><span class="line">                'data': fields.Nested(usermodel_fileds)</span><br><span class="line">            &#125;</span><br><span class="line">        </span><br><span class="line">	结构允许嵌套列表</span><br><span class="line">		fields.List(fields.Nested) </span><br><span class="line">        </span><br><span class="line">        	# 格式化字段</span><br><span class="line">            usermodel_fileds = &#123;</span><br><span class="line">                'id': fields.Integer,</span><br><span class="line">                'name': fields.String,</span><br><span class="line">            &#125;</span><br><span class="line">            users3_fields = &#123;</span><br><span class="line">                'status': fields.String(default=1),</span><br><span class="line">                'msg': fields.String,</span><br><span class="line">                'data': fields.List(fields.Nested(usermodel_fileds))</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">连接字段</span><br><span class="line">    就是将当前数据的操作api暴露出来</span><br><span class="line">    根据提供的url和唯一标识进行数据操作</span><br><span class="line"></span><br><span class="line"># 格式化字段</span><br><span class="line">usermodel_fileds = &#123;</span><br><span class="line">    'id': fields.Integer,</span><br><span class="line">    'name': fields.String,</span><br><span class="line">    'url': fields.Url('id', absolute=True)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 在add_resource中提供对应的endpoint</span><br><span class="line">api.add_resource(Users4, '/user4/', endpoint='id')</span><br></pre></td></tr></table></figure>
+<h3 id="参数解析"><a href="#参数解析" class="headerlink" title="参数解析"></a>参数解析</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">可以不通过request.form或request.args获取参数, 而是通过reqparse.RequestParser来解析</span><br><span class="line"></span><br><span class="line">    # 参数转换器</span><br><span class="line">    parser = reqparse.RequestParser()</span><br><span class="line">    parser.add_argument('name', type=str, action='append')  # 支持多个name</span><br><span class="line">    parser.add_argument('id', type=int, required=True, help='id是必须的') # 必需参数</span><br><span class="line">    parser.add_argument('fldt_active', type=str, location='cookies')  # 获取cookies中的数据</span><br><span class="line"></span><br><span class="line">    class Users4(Resource):</span><br><span class="line">        def get(self):</span><br><span class="line">            parse = parser.parse_args()</span><br><span class="line">            user_name = parse.get('name')</span><br><span class="line">            id = parse.get('id')</span><br><span class="line">            fldt_active = parse.get('fldt_active')</span><br><span class="line">            return &#123;'name': user_name, 'id': id, 'fldt_active':fldt_active&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="导入json文件内数据"><a href="#导入json文件内数据" class="headerlink" title="导入json文件内数据"></a>导入json文件内数据</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">1.制定表格执行迁移</span><br><span class="line">2.从json文件中获取表格内数据(**eval(),json.load()的使用)</span><br><span class="line">3.导入pymysql将获取的数据导入表格内</span><br><span class="line">如:goods.py文件</span><br><span class="line"># 获取商品数据</span><br><span class="line">import pymysql</span><br><span class="line">from flask import jsonify</span><br><span class="line"></span><br><span class="line">def get_goods_data():</span><br><span class="line">	#先连接数据库</span><br><span class="line">    db = pymysql.Connect(host='localhost',port=3306,user = 'root',password='rock1204',database='testflask3',charset='utf8')</span><br><span class="line">	#设置游标</span><br><span class="line">    cursor = db.cursor()</span><br><span class="line">	#打开文件</span><br><span class="line">    with open('goods.json','r') as fp:</span><br><span class="line">        goods = eval(fp.read())</span><br><span class="line">		#事务开启</span><br><span class="line">		db.begin()</span><br><span class="line">        for good in goods:</span><br><span class="line">            gid = good.get('gid')</span><br><span class="line">            name = good.get('name')</span><br><span class="line">            price = good.get('price')</span><br><span class="line">            unit = good.get('unit')</span><br><span class="line">            headImg = good.get('headImg')</span><br><span class="line">			#执行</span><br><span class="line">            cursor.execute('insert into goods(gid,name,price,unit,headImg) values("%d","%s","%d","%s","%s")'%(gid,name,price,unit,headImg))</span><br><span class="line">           </span><br><span class="line">            #提交事务</span><br><span class="line">            db.commit()</span><br><span class="line">		#关闭游标</span><br><span class="line">        cursor.close()</span><br><span class="line">		#结束事务</span><br><span class="line">        db.close()</span><br><span class="line">if __name__ == '__main__':</span><br><span class="line">    get_goods_data()</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">发送邮箱验证:</span><br><span class="line">1.exts导入Mail,cache</span><br><span class="line">2.setting中配置邮箱MAIL_SERVER="smtp.163.com",MAIL_USERNAME='zkr744@163.com',MAIL_PASSWORD = '123abc'</span><br><span class="line">3.给指定邮箱发送邮件</span><br><span class="line"># 临时存储5分钟, 请在5分钟之内激活</span><br><span class="line">            cache.set(user.token, user.id, timeout=300)</span><br><span class="line"># 给指定的邮箱发送邮件</span><br><span class="line">            msg = Message(subject='淘票票邮箱激活', sender='niejeff@163.com', recipients=[email])</span><br><span class="line">            # 邮箱内容</span><br><span class="line">            msg.html = render_template('email_active.html', username=username, active_url='http://127.0.0.1:8002/accountactive/?u_token=%s' % user.token)</span><br><span class="line">            # 发送</span><br><span class="line">            mail.send(msg)</span><br><span class="line">4.激活邮箱</span><br><span class="line"># 获取当前u_token临时存储userid</span><br><span class="line">        userid = cache.get(u_token)</span><br><span class="line">        if userid:</span><br><span class="line">            user = UserModel.query.get(userid)</span><br><span class="line">            user.is_active = True  # 激活</span><br><span class="line">            db.session.commit()</span><br><span class="line"></span><br><span class="line">            cache.delete(u_token)  # 删除token</span><br><span class="line"></span><br><span class="line">密码加密与解密</span><br><span class="line">1.导入generate_password_hash()函数</span><br><span class="line">如:user.passwd = generate_password_hash(password)  # 加密</span><br><span class="line">密码解密</span><br><span class="line">1.导入check_password_hash()函数</span><br><span class="line">如:check_password_hash(user.passwd, password),两个参数,第一个是密文,第二个是输入的密码,判断两个是否相同.</span><br><span class="line"></span><br><span class="line">用户权限:abort</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/14/Flask/" data-id="cjlgj9led0000roumub16yeuv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/14/Flask/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
